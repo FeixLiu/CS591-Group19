@@ -1,11 +1,11 @@
 public class Currency {
-    private String type;
+    private String currencyType;
 
     public Currency(String type) {
-        this.type = type;
+        this.currencyType = type;
     }
 
-    public String getType() {
-        return type;
+    public String getCurrencyType() {
+        return currencyType;
     }
 }

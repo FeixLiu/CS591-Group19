@@ -1,9 +1,13 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Stock {
     private double price;
     private int available;
     private String companyName;
     private int haveSold;
     private int currentSold;
+    private List<Double> historyPrice;
 
     public Stock(double price, int available, String companyName) {
         this.price = price;
@@ -11,6 +15,12 @@ public class Stock {
         this.companyName = companyName;
         this.haveSold = 0;
         this.currentSold = 0;
+        this.historyPrice = new ArrayList<>();
+        historyPrice.add(price);
+    }
+
+    public List<Double> getHistoryPrice() {
+        return historyPrice;
     }
 
     public int getAvailable() {
@@ -35,6 +45,7 @@ public class Stock {
 
     public void changePrice(double price) {
         this.price = price;
+        this.historyPrice.add(price);
     }
 
     public void buyStock(int delta) {

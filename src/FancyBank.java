@@ -13,13 +13,9 @@ public class FancyBank implements Bank{
     private int savingLimit;
     private List<Balance> myBalance;
     private List<Stock> stocks;
+    private Customer currentCustomer;
 
     public FancyBank() {
-        System.out.println("The default service fee is $10.\n" +
-                "The default saving interest is 5%.\n" +
-                "The default loan interest is 10%.\n" +
-                "Saving account with more than 100 will earn interests.\n" +
-                "Saving account with more than $500 can create security account.\n\n");
         //int[] bankStart(); return current service fee, saving interest, loan interest
         manager = new Manager();
         savingInterest = new InterestRate(0.05);
@@ -33,6 +29,14 @@ public class FancyBank implements Bank{
         myBalance = new ArrayList<>();
         stocks = new ArrayList<>();
         //loadFromDatabase();
+    }
+
+    public String startDay() {
+        return  "The default service fee is $10.\n" +
+                "The default saving interest is 5%.\n" +
+                "The default loan interest is 10%.\n" +
+                "Saving account with more than 100 will earn interests.\n" +
+                "Saving account with more than $500 can create security account.\n\n";
     }
 
     public void mainMenu() {

@@ -4,7 +4,7 @@ write all information to the database at the end of the day
 
 #Second method
 ##StartDay
-####int[] bankStart()
+####double[] bankStart()
 return current service fee, saving interest, loan interest
 
 ##BankOperations()

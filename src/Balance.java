@@ -12,7 +12,7 @@ public class Balance {
     }
 
     public String getType() {
-        return type.getType();
+        return type.getCurrencyType();
     }
 
     public boolean decreaseBalance(double delta) {
