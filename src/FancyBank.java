@@ -274,7 +274,7 @@ public class FancyBank implements Bank{
         System.out.println(lookingAllStocks());
         System.out.print("Company's name: ");
         String name = Util.readStr();
-        System.out.print("But how many share: ");
+        System.out.print("Buy how many share: ");
         int available = Util.readInt();
         System.out.print("Security account's id: ");
         String id = Util.readStr();
@@ -460,7 +460,7 @@ public class FancyBank implements Bank{
         }
     }
 
-    private Customer customerLogin() {
+    public Customer customerLogin() {
         System.out.print("Customer's name: ");
         String name = Util.readStr();
         System.out.print("Customer's id: ");
@@ -488,7 +488,7 @@ public class FancyBank implements Bank{
         return null;
     }
 
-    private boolean managerLogin(int which) {
+    public boolean managerLogin(int which) {
         System.out.print("Password: ");
         String pass = Util.readStr();
         //boolean managerLogin(String password); check whether the password for manger correct or not
@@ -505,7 +505,7 @@ public class FancyBank implements Bank{
         return false;
     }
 
-    private void newCustomer() {
+    public void newCustomer() {
         Id id = newId(Config.NEWCUSTOMER);
         System.out.println("Customer's id:" + id.getId());
         System.out.println("Customer's name:");
@@ -544,7 +544,7 @@ public class FancyBank implements Bank{
         return false;
     }
 
-    private Id newId(int which) {
+    public Id newId(int which) {
         int a = (int)(Math.random() * 1000);
         a = Math.abs(a);
         while (testDuplicate(String.valueOf(a), which))
