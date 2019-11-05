@@ -4,7 +4,7 @@ calling: call at the start of the day <br>
 return: some basic information of the bank
 
 ##bank operations
-####public boolean managerLogin(String pass, int which)
+####public boolean managerLogin(String pass, int which) 
 input: password for manager, whether manager login or end the day<br>
 calling: call at the manager login or end the day <br>
 return: true for success, false for all errors

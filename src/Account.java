@@ -7,7 +7,7 @@ class Account {
     private Password accountPassword;
     private String type;
 
-    public Account(Id accountId, Password accountPassword, int serviceFee, String type) {
+    public Account(Id accountId, Password accountPassword, double serviceFee, String type) {
         this.accountId = accountId;
         this.accountPassword = accountPassword;
         accountBalance = new ArrayList<>();

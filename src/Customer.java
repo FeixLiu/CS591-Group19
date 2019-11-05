@@ -79,13 +79,13 @@ public class Customer extends Person {
             loan.calculateInterest();
     }
 
-    public void calculateSave(int limit) {
+    public void calculateSave(double limit) {
         for (Account ac : accounts)
             if (ac.getType().equals("Saving"))
                 ((Saving) ac).updateBalance(limit);
     }
 
-    public void viewTransaction(int fee) {
+    public void viewTransaction(double fee) {
         for (Account ac : accounts)
             ac.addMoney(-fee, "all");
     }

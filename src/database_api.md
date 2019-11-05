@@ -72,7 +72,7 @@ get one kind of money from the customer's account
 create a security account for the customer
 ####void addMoney(String cId, String cName, String id, double money, String type); 
 add a one kind of money to the customer's account, if don't have that kind of money, create it
-####int[] getStock(String name); 
+####double[] getStock(String name); 
 check whether has a stock, if has return the available and price, if not return [-1, -1]
 ####String getSavingIdForSecurity(String cId, String cName, String id); 
 return the saving account's id relating with the security account
