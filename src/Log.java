@@ -1,3 +1,6 @@
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Log {
     private String log;
 
@@ -20,6 +23,11 @@ public class Log {
     }
 
     public void addLog(String log) {
+        SimpleDateFormat sdf = new SimpleDateFormat();
+        sdf.applyPattern("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date();// 获取当前时间
+        this.log += sdf.format(date);
+        this.log += "\t";
         this.log += log;
     }
 }

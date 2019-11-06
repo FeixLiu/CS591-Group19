@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class FancyBank implements Bank{
@@ -16,6 +17,7 @@ public class FancyBank implements Bank{
     private Customer currentCustomer;
     private DataBase db;
     private Id id;
+    private int date;
 
     public FancyBank() {
         db = new DataBase();
@@ -23,17 +25,70 @@ public class FancyBank implements Bank{
         //double[] information = db.bankStart();
         manager = new Manager();
         StartInfo startInfo = db.startInfo();
-        savingInterest = new InterestRate(0.05);
-        loanInterest = new InterestRate(0.1);
+        loadData(startInfo);
+        log = new Log();
+        savingLimit = 100;
+        id = new Id("bank");
+        //loadFromDatabase();
+    }
+
+    private void loadData(StartInfo si) {
+        savingInterest = new InterestRate(si.bankInfo.get(1));
+        loanInterest = new InterestRate(si.bankInfo.get(2));
+        serviceFee = si.bankInfo.get(0);
+        date = (int)((double) si.bankInfo.get(6));
+        myBalance = new ArrayList<>();
+        myBalance.add(new Balance(si.bankInfo.get(3), "Dollar"));
+        myBalance.add(new Balance(si.bankInfo.get(4), "Euro"));
+        myBalance.add(new Balance(si.bankInfo.get(5), "Yuan"));
+        stocks = new ArrayList<>();
+        for (HashMap<String, List<Double>> stock: si.stockInfo) {
+            for (String name: stock.keySet()) {
+                List<Double> info = stock.get(name);
+                Stock newStock = new Stock(info.get(1), (int)((double) info.get(0)), name);
+                newStock.setSold((int)((double) info.get(2)), (int)((double) info.get(3)));
+                for (int i = info.size() - 1; i > 3; i--)
+                    newStock.insertHistory(info.get(i));
+                stocks.add(newStock);
+            }
+        }
         customers = new ArrayList<>();
         accounts = new ArrayList<>();
         loans = new ArrayList<>();
-        stocks = new ArrayList<>();
-        log = new Log();
-        serviceFee = 10;
-        savingLimit = 100;
-        myBalance = new ArrayList<>();id = new Id("bank");
-        //loadFromDatabase();
+        for (String id: si.customerInfo.keySet()) {
+            CustomerInfo ci = si.customerInfo.get(id);
+            Customer newCustomer = new Customer(new Id(id), new Password(ci.pass), new Name(ci.name));
+            customers.add(newCustomer);
+            for (double loan: ci.loanInfo) {
+                Loan newLoan = new Loan(loan, loanInterest);
+                newCustomer.addLoan(newLoan);
+                if (!loans.contains(newCustomer))
+                    loans.add(newCustomer);
+            }
+            for (AccountInfo ai: ci.accountInfo) {
+                Account newAccount;
+                if (ai.type.equals("Checking"))
+                    newAccount = new Checking(new Id(ai.id), new Password(ai.pass), serviceFee);
+                else
+                    newAccount = new Saving(new Id(ai.id), new Password(ai.pass), savingInterest, serviceFee);
+                for (String type: ai.balanceInfo.keySet())
+                    newAccount.addMoney(ai.balanceInfo.get(type), type);
+                newCustomer.addAccount(newAccount);
+                accounts.add(newAccount);
+            }
+            for (SecurityInfo sei: ci.securityInfo) {
+                Account save = newCustomer.getAccount(sei.saveId);
+                Security newAccount = new Security(new Id(sei.id), new Password(sei.pass), serviceFee, save);
+                HashMap<Stock, HashMap<Double, Integer>> bought = new HashMap<>();
+                for (String name: sei.stocks.keySet()) {
+                    Stock s = getStock(name);
+                    bought.put(s, sei.stocks.get(name));
+                }
+                newAccount.setBought(bought);
+                newCustomer.addAccount(newAccount);
+                accounts.add(newAccount);
+            }
+        }
     }
 
     public String startDay() {
@@ -70,6 +125,7 @@ public class FancyBank implements Bank{
         }
         calculateLoan();
         calculateSave();
+        db.endDay();
         //writeToDatabase()
     }
 
@@ -169,6 +225,7 @@ public class FancyBank implements Bank{
     private String lookingAllStocks() {
         //String lookingAllStocks(); return the information of all stocks (current price, current available, shares have sold, shares current sold)
         log.addLog("Manager look all stocks.\n");
+        db.addLog(id.getId(), "Manager look all stocks.\n", date);
         StringBuilder temp = new StringBuilder();
         for (Stock s: stocks) {
             temp.append(s.getCompanyName()).append("'s stock is ").append(s.getPrice()).

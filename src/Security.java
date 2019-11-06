@@ -4,10 +4,14 @@ public class Security extends Account{
     private HashMap<Stock, HashMap<Double, Integer>> stocks;
     private Account save;
 
-    public Security(Id accountId, Password accountPassword, int serviceFee, Account save) {
+    public Security(Id accountId, Password accountPassword, double serviceFee, Account save) {
         super(accountId, accountPassword, serviceFee, "Security");
         stocks = new HashMap<>();
         this.save = save;
+    }
+
+    public void setBought(HashMap<Stock, HashMap<Double, Integer>> s) {
+        stocks = s;
     }
 
     public Account getSave() {

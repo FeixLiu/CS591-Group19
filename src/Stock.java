@@ -31,6 +31,15 @@ public class Stock {
         return companyName;
     }
 
+    public void setSold(int have, int cur) {
+        this.haveSold = have;
+        this.currentSold = cur;
+    }
+
+    public void insertHistory(double price) {
+        historyPrice.add(0, price);
+    }
+
     public double getPrice() {
         return price;
     }

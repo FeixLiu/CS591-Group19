@@ -40,3 +40,7 @@ void increaseBalance(String type); increase the bank's balance with one serviceF
 
 StartInfo startInfo(); return all the information
 
+void addLog(String id, String log, String date);
+
+void endDay();
+

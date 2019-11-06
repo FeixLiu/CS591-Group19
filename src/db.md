@@ -2,18 +2,20 @@
 saveInterest double<br>
 loanInterest double<br>
 serviceFee double<br>
-logId<br>
+logId String<br>
+id String<br>
 dollarBalance double<br>
 euroBalance double<br>
 yuanBalance double<br>
 managerPass String<br>
 managerName String<br>
+date Int<br>
 
 #user
 id String prim-key<br>
 name String<br>
 pass String<br>
-logId<br>
+logId String<br>
 
 #account
 id String prim-key<br>
@@ -49,3 +51,4 @@ historyPrice String<br>
 #log
 logId String prim-key<br>
 log String<br>
+date String prim-key<br>
