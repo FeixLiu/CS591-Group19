@@ -1,0 +1,42 @@
+void changeStockPrice(String companyName, double newPrice); change the price of a specific company
+
+void modifyStockAvailable(String companyName, int newAvailable); change the available of a specific company
+
+void addNewStock(String companyName, int available, double price); add a new stock
+
+void deleteStock(String companyName); delete a stock
+
+void withDrawMoney(String cId, String cName, String id, double money, String type); with draw one kind on money from one account
+
+void buyStock(String cId, String cName, String id, String companyName, String howMany, double price); buy howMany shares stocks with price, modify the available, currentSold, haveSold information of stocks modify the information of the security account
+
+void addMoney(String cId, String cName, String id, double money, String type); add a one kind of money to the customer's account, if don't have that kind of money, create it
+
+void sellStock(String cId, String cName, String id, String name); sell stock of company name
+
+void newCustomer(String id, String passWord, String name); add a new customer
+
+void createAccount(String cId, String cName, String id, String pass, double initialBalance, String type); create a ‘type’ account for the customer, the initialBalance is a balance for dollar
+
+void createSecurity(String cId, String cName, String id, String pass, String associateSavingId); create a security account associate with a saving account
+
+void requestALoan(String cId, String cName, double money); request a loan
+
+void payForLoan(String cId, String cName); pay for all loan, delete all loans relating with the customer
+
+void closeAccount(String cId, String cName, String id); close an account
+
+void closeSecurity(String cId, String cName, String id); close a security account
+
+void changeInterest(double saving, double loan); change the interest of saving account and loan
+
+void calculateLoan(); update all loan by the loan interest
+
+void calculateSave(); update all save more than saving limit by the save interest
+
+void changeServiceFee(int newService); change the service fee of the bank
+
+void increaseBalance(String type); increase the bank's balance with one serviceFee
+
+StartInfo startInfo(); return all the information
+

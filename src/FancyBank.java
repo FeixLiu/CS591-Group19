@@ -9,33 +9,38 @@ public class FancyBank implements Bank{
     private InterestRate savingInterest;
     private InterestRate loanInterest;
     private Log log;
-    private int serviceFee;
-    private int savingLimit;
+    private double serviceFee;
+    private double savingLimit;
     private List<Balance> myBalance;
     private List<Stock> stocks;
     private Customer currentCustomer;
+    private DataBase db;
+    private Id id;
 
     public FancyBank() {
+        db = new DataBase();
         //int[] bankStart(); return current service fee, saving interest, loan interest
+        //double[] information = db.bankStart();
         manager = new Manager();
+        StartInfo startInfo = db.startInfo();
         savingInterest = new InterestRate(0.05);
         loanInterest = new InterestRate(0.1);
         customers = new ArrayList<>();
         accounts = new ArrayList<>();
         loans = new ArrayList<>();
+        stocks = new ArrayList<>();
         log = new Log();
         serviceFee = 10;
         savingLimit = 100;
-        myBalance = new ArrayList<>();
-        stocks = new ArrayList<>();
+        myBalance = new ArrayList<>();id = new Id("bank");
         //loadFromDatabase();
     }
 
     public String startDay() {
-        return  "The default service fee is $10.\n" +
-                "The default saving interest is 5%.\n" +
-                "The default loan interest is 10%.\n" +
-                "Saving account with more than 100 will earn interests.\n" +
+        return  "The default service fee is $" + this.serviceFee + ".\n" +
+                "The default saving interest is " + this.savingInterest.getInterest() + "%.\n" +
+                "The default loan interest is " + this.loanInterest.getInterest() + "%.\n" +
+                "Saving account with more than " + this.savingLimit + " will earn interests.\n" +
                 "Saving account with more than $500 can create security account.\n\n";
     }
 
@@ -215,6 +220,7 @@ public class FancyBank implements Bank{
         else {
             log.addLog("Manager change" + stock.getCompanyName() + "'s stock price from" + stock.getPrice() + " to " + price + ".\n");
             stock.changePrice(price);
+            db.changeStockPrice(name, price);
         }
     }
 
@@ -232,6 +238,7 @@ public class FancyBank implements Bank{
         else {
             log.addLog("Manager change" + stock.getCompanyName() + "'s stock available from" + stock.getAvailable() + " to " + available + ".\n");
             stock.setAvailable(available);
+            db.modifyStockAvailable(name, available);
         }
     }
 
@@ -252,6 +259,7 @@ public class FancyBank implements Bank{
             Stock news = new Stock(price, available, name);
             stocks.add(news);
             log.addLog("Manager add new stock from " + name + " with price " + price + " has " + available + " available.\n");
+            db.addNewStock(name, available, price);
         }
     }
 
@@ -267,6 +275,7 @@ public class FancyBank implements Bank{
         else {
             log.addLog("Manager delete" + name + "'s stock.\n");
             stocks.remove(stock);
+            db.deleteStock(name);
         }
     }
 
@@ -282,6 +291,7 @@ public class FancyBank implements Bank{
         String pass = Util.readStr();
         //String getAccount(String cId, String cName, String id, String pass);
         Account s = ((Customer) currentOperator).getAccount(id);
+        //String type = db.getAccount(((Customer) currentOperator).getId().getId(), ((Customer) currentOperator).getName().getName(), id, pass);
         if (s == null || !s.getType().equals("Security")) {
             System.out.println("Don't have a security account.");
             log.addLog(currentOperator.getName().getName() +"Fail to buy stock.\n");
@@ -297,30 +307,40 @@ public class FancyBank implements Bank{
             //int[] getStock(String name); check whether has a stock, if has return the available and price, if not return [-1, -1]
             if (a == null) {
                 System.out.println("Don't have such stock.");
-                log.addLog(currentOperator.getName().getName() +"Fail to buy stock.\n");
+                log.addLog(currentOperator.getName().getName() + "Fail to buy stock.\n");
                 ((Customer) currentOperator).addLog("Fail to buy stock.\n");
-            }
-            else if (a.getAvailable() < available) {
+            } else if (a.getAvailable() < available) {
                 System.out.println("Don't have enough available.");
-                log.addLog(currentOperator.getName().getName() +"Fail to buy stock.\n");
+                log.addLog(currentOperator.getName().getName() + "Fail to buy stock.\n");
                 ((Customer) currentOperator).addLog("Fail to buy stock.\n");
-            }
-            else {
+            } else {
                 double totalPrice = a.getPrice() * available;
                 //String getSavingIdForSecurity(String cId, String cName, String id); return the saving account's id relating with the security account
                 //boolean withDrawMoney(String cId, String cName, String id, double money, String type); with draw one
                 // kind on money from one account, if sufficient money, modify the balance, if not reutrn false
                 if (!((Security) s).getSave().withdrawMoney(totalPrice, "Dollar")) {
                     System.out.println("Don't have enough money.");
-                    log.addLog(currentOperator.getName().getName() +"Fail to buy stock.\n");
+                    log.addLog(currentOperator.getName().getName() + "Fail to buy stock.\n");
                     ((Customer) currentOperator).addLog("Fail to buy stock.\n");
-                }
-                else {
+                } else {
                     //void buyStock(String cId, String cName, String id, String companyName, String howMany, double price);
                     // buy howMany shares stocks with price, modify the available, currentSold, haveSold information of stocks
                     // modify the information of the security account
+                    db.withDrawMoney(
+                            ((Customer) currentOperator).getId().getId(),
+                            currentOperator.getName().getName(),
+                            s.getAccountId().getId(),
+                            totalPrice,
+                            "Dollar"
+                    );
+                    db.buyStock(
+                            ((Customer) currentOperator).getId().getId(),
+                            currentOperator.getName().getName(),
+                            s.getAccountId().getId(),
+                            name, available, a.getPrice()
+                    );
                     ((Security) s).addStocks(a, available);
-                    log.addLog(currentOperator.getName().getName() +"to buy stock.\n");
+                    log.addLog(currentOperator.getName().getName() + "to buy stock.\n");
                     ((Customer) currentOperator).addLog("Buy stock.\n");
                     ((Security) s).getSave().addMoney(-serviceFee, "Dollar");
                     increseBalance("Dollar");
@@ -366,7 +386,9 @@ public class FancyBank implements Bank{
             }
             else {
                 double money = ((Security) s).sellStock(a);
+                db.sellStock(((Customer) currentOperator).getId().getId(), currentOperator.getName().getName(), id, name);
                 ((Security) s).getSave().addMoney(money - serviceFee, "Dollar");
+                db.addMoney(((Customer) currentOperator).getId().getId(), currentOperator.getName().getName(), id, money, "Dollar");
                 System.out.println("Earn " + money + ".\n");
                 log.addLog(currentOperator.getName().getName() + "Sell stock.\n");
                 ((Customer) currentOperator).addLog("Sell stock.\n");
@@ -396,12 +418,14 @@ public class FancyBank implements Bank{
         String pass = Util.readStr();
         System.out.println("To which account (input id)");
         String to = Util.readStr();
+        System.out.println("Password for this account");
+        String pass2 = Util.readStr();
         System.out.println("Which kind of money do you want to transfer?\n" +
                 "You can input 'Dollar', 'Euro' or 'Yuan'");
         String kind = Util.readStr();
         System.out.println("How much money to you want to transfer?");
         double money = Util.readDouble();
-        String[] key = {from, pass, to, kind};
+        String[] key = {from, pass, to, kind, pass2};
         Account ac1 = ((Customer) currentOperator).getAccount(key[0]);
         Account ac2 = ((Customer) currentOperator).getAccount(key[2]);
         //String getAccount(String cId, String cName, String id, String pass);
@@ -417,7 +441,7 @@ public class FancyBank implements Bank{
             System.out.println("Cannot transfer from saving!");
         }
         else {
-            if (key[1].length() > 8 || !ac1.checkPassword(key[1])) {
+            if (key[1].length() > 8 || !ac1.checkPassword(key[1]) || key[4].length() > 8 || !ac2.checkPassword(key[4])) {
                 System.out.println("Wrong password!");
                 log.addLog(currentOperator.getName().getName() + " make transaction fail.\n");
                 ((Customer) currentOperator).addLog("Make Transaction fail \n");
@@ -444,6 +468,14 @@ public class FancyBank implements Bank{
                 }
                 //void addMoney(String cId, String cName, String id, double money, String type);
                 else {
+                    db.withDrawMoney(
+                            ((Customer) currentOperator).getId().getId(),
+                            currentOperator.getName().getName(),
+                            from,
+                            money,
+                            kind
+                    );
+                    db.addMoney(((Customer) currentOperator).getId().getId(), currentOperator.getName().getName(), to, money, kind);
                     log.addLog(currentOperator.getName().getName() + " withdraw " + key[3] + " " + money +
                             "from account: " + ac1.getAccountId().getId() +"\n");
                     ((Customer) currentOperator).addLog("Withdraw " + key[3] + " " + money +
@@ -521,6 +553,7 @@ public class FancyBank implements Bank{
             System.out.println("Passwords don't match!");
         else {
             //void newCustomer(String id, String passWord, String name); add a new customer
+            db.newCustomer(id, p1, name);
             Password pass = new Password(key[1]);
             Customer c = new Customer(id, pass, new Name(key[0]));
             customers.add(c);
@@ -576,6 +609,7 @@ public class FancyBank implements Bank{
             Password pass = new Password(key[1]);
             if (which == Config.NEWCHECKING) {
                 //void createChecking(String cId, String cName, String id, String pass, double initialBalance); create a checking account
+                db.createAccount(((Customer) currentOperator).getId().getId(), currentOperator.getName().getName(), id.getId(), p1, -serviceFee, "Checking");
                 Checking c = new Checking(id, pass, -serviceFee);
                 accounts.add(c);
                 ((Customer) currentOperator).addAccount(c);
@@ -584,6 +618,7 @@ public class FancyBank implements Bank{
             }
             else if (which == Config.NEWSAVING){
                 //void createSaving(String cId, String cName, String id, String pass, double savingInterest, double initialBalance); create a saving account
+                db.createAccount(((Customer) currentOperator).getId().getId(), currentOperator.getName().getName(), id.getId(), p1, -serviceFee, "Saving");
                 Saving s = new Saving(id, pass, savingInterest, -serviceFee);
                 accounts.add(s);
                 ((Customer) currentOperator).addAccount(s);
@@ -612,6 +647,8 @@ public class FancyBank implements Bank{
                     } else {
                         //void addMoney(String cId, String cName, double money, String type); add a one kind of money to the account
                         //void createSecurity(String cId, String cName, String id, String pass, String associateSavingId); create a security account
+                        db.createSecurity(((Customer) currentOperator).getId().getId(), currentOperator.getName().getName(),
+                                id.getId(), p1, save);
                         Security news = new Security(id, pass, 0, ac);
                         ac.addMoney(-serviceFee, "Dollar");
                         accounts.add(news);
@@ -658,6 +695,7 @@ public class FancyBank implements Bank{
                         + ac.getAccountId().getId() + "\n");
                 ((Customer) currentOperator).addLog("Log into account " + ac.getAccountId().getId() + ".\n");
                 if (which == Config.ADD) {
+                    db.addMoney(((Customer) currentOperator).getId().getId(), currentOperator.getName().getName(), id, money, type);
                     //void addMoney(String cId, String cName, String id, double money, String type);
                     ac.addMoney(money, key[2]);
                     log.addLog(currentOperator.getName().getName() + " add "  + key[2] + " " +  money +
@@ -674,6 +712,11 @@ public class FancyBank implements Bank{
                         ((Customer) currentOperator).addLog("Fail to withdraw money account.\n");
                     }
                     else {
+                        db.withDrawMoney(
+                                ((Customer) currentOperator).getId().getId(),
+                                currentOperator.getName().getName(),
+                                id, money, type
+                        );
                         log.addLog(currentOperator.getName().getName() + " withdraw " + key[2] + " " + money +
                                 "from account: " + ac.getAccountId().getId() +"\n");
                         ((Customer) currentOperator).addLog("Withdraw " + key[2] + " " + money +
@@ -696,6 +739,7 @@ public class FancyBank implements Bank{
         }
         else {
             //void requestALoan(String cId, String cName, double money, double loanInterest); request a loan
+            db.requestALoan(((Customer) currentOperator).getId().getId(), currentOperator.getName().getName(), money);
             Loan loan = new Loan(money, loanInterest);
             if (!loans.contains(currentOperator))
                 loans.add((Customer) currentOperator);
@@ -745,12 +789,18 @@ public class FancyBank implements Bank{
                     }
                     else {
                         //void payForLoan(String cId, String cName); pay for all loan
+                        db.payForLoan(((Customer) currentOperator).getId().getId(), currentOperator.getName().getName());
                         List<Loan> loan = ((Customer) currentOperator).getAllLoan();
                         ((Customer) currentOperator).removeAllLoan();
                         for (Loan l: loan) {
                             loan.remove(l);
                         }
                         ac.withdrawMoney(loanM, "Dollar");
+                        db.withDrawMoney(
+                                ((Customer) currentOperator).getId().getId(),
+                                currentOperator.getName().getName(),
+                                id, loanM, "Dollar"
+                        );
                     }
                 }
             }
@@ -797,7 +847,7 @@ public class FancyBank implements Bank{
                         + ac.getAccountId().getId() + "\n");
                 ((Customer) currentOperator).addLog("Log into account." + ac.getAccountId().getId() + "\n");
                 if (!ac.getType().equals("Security")) {
-                    //double closeAccount(String cId, String cName, String id); close an account and return the money it left
+                    //void closeAccount(String cId, String cName, String id); close an account and return the money it left
                     List<Balance> balance = ac.getAccountBalance();
                     StringBuilder left = new StringBuilder();
                     for (Balance b : balance) {
@@ -809,11 +859,13 @@ public class FancyBank implements Bank{
                     log.addLog(currentOperator.getName().getName() + " close account"
                             + ac.getAccountId().getId() + ".\n");
                     accounts.remove(ac);
+                    db.closeAccount(((Customer) currentOperator).getId().getId(), currentOperator.getName().getName(), id);
                     System.out.println(left.toString());
                 }
                 else {
                     double money = ((Security) ac).sellAllStock();
-                    //double sellAllStock(String cId, String cName, String id); sell all money in a security account and close that account
+                    //void closeSecurity(String cId, String cName, String id); sell all money in a security account and close that account
+                    db.closeSecurity(((Customer) currentOperator).getId().getId(), currentOperator.getName().getName(), id);
                     ((Customer) currentOperator).removeAccount(ac);
                     ((Customer) currentOperator).addLog("Close account: " + ac.getAccountId().getId() + ".\n");
                     log.addLog(currentOperator.getName().getName() + " close account"
@@ -874,6 +926,7 @@ public class FancyBank implements Bank{
         double sr = Util.readDouble();
         System.out.println("New loan rate");
         double lr = Util.readDouble();
+        db.changeInterest(sr, lr);
         log.addLog("Manager loan interest from " + loanInterest.getInterest() + " to " + lr + ".\n");
         log.addLog("Manager save interest from " + savingInterest.getInterest() + " to " + sr + ".\n");
         loanInterest.setInterest(lr);
@@ -894,6 +947,7 @@ public class FancyBank implements Bank{
 
     private void calculateLoan() {
         //void calculateLoan(); update all loan by the loan interest
+        db.calculateLoan();
         log.addLog("Manager calculate loan interest.\n");
         for (Customer c : customers)
             c.calculateLoan();
@@ -901,6 +955,7 @@ public class FancyBank implements Bank{
 
     private void calculateSave() {
         //void calculateSave(); update all save more than saving limit by the save interest
+        db.calculateSave();
         log.addLog("Manager calculate save interest.\n");
         for (Customer c : customers)
             c.calculateSave(savingLimit);
@@ -909,13 +964,15 @@ public class FancyBank implements Bank{
     private void changeServiceFee() {
         //void changeServiceFee(int newService); change the service fee of the bank
         System.out.print("New service fee");
-        int a = Util.readInt();
+        double a = Util.readDouble();
+        db.changeServiceFee(a);
         log.addLog("Manager change service fee from " + serviceFee + " to " + a + ".\n");
         serviceFee = a;
     }
 
     private void increseBalance(String type) {
         //void increaseBalance(String type); increase the bank's balance with one serviceFee
+        db.increaseBalance(type);
         for (Balance b: myBalance) {
             if (b.getType().equals(type)) {
                 b.increaseBalance(serviceFee);
