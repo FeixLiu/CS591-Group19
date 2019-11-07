@@ -19,12 +19,12 @@ public class Regist_Controller{
     Button register;
     @FXML
     TextField name;
-    @FXML
-    TextField address;
-    @FXML
-    TextField username;
+//    @FXML
+//    TextField address;
     @FXML
     TextField password;
+    @FXML
+    TextField repeat;
 
     public void setLogin(Scene scene){
         login = scene;
@@ -35,9 +35,9 @@ public class Regist_Controller{
 
     public void reset(){
         name.setText("");
-        address.setText("");
-        username.setText("");
+//        address.setText("");
         password.setText("");
+        repeat.setText("");
     }
 
     public void cancel_clicked(){
@@ -48,13 +48,14 @@ public class Regist_Controller{
     }
 
     public void register_clicked() throws IOException {
-//        System.out.println(("Register clicked"));
-//        for(User user : atm.getUsers()){
+        System.out.println(("Register clicked"));
+//        for(Customer user : bank()){
 //            if(user.getUsername().compareTo(username.getText())==0){
 //                System.out.println("username exist");
 //                return;
 //            }
 //        }
+
 //        if(name.getText().length() != 0 && address.getText().length() != 0 && username.getText().length()!=0 && password.getText().length()!=0){
 //            User u = atm.register(name.getText(), address.getText(), username.getText(), password.getText());
 //            FXMLLoader main_loader = new FXMLLoader(getClass().getResource("main.fxml"));
@@ -69,8 +70,17 @@ public class Regist_Controller{
 //            window.setScene(main);
 //            return;
 //        }
+        Id id = bank.newId(Config.NEWCUSTOMER);
 
-        System.out.println("Check inputs");
+        if (bank.newCustomer(id, name.getText(), password.getText(), repeat.getText())){
+            Stage window = (Stage) cancel.getScene().getWindow();
+            reset();
+            window.setScene(login);
+        }
+        else{
+
+        }
+
     }
 
     public void setBank(FancyBank bank) {

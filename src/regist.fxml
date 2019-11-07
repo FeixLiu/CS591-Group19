@@ -10,15 +10,13 @@
 
 <AnchorPane prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Regist_Controller">
    <children>
-      <Label layoutX="348.0" layoutY="217.0" text="Name" />
-      <Label layoutX="342.0" layoutY="282.0" text="Address" />
-      <Label layoutX="339.0" layoutY="349.0" text="Username" />
-      <Label layoutX="341.0" layoutY="413.0" text="Password" />
-      <TextField fx:id="name" layoutX="448.0" layoutY="212.0" />
-      <TextField fx:id="address" layoutX="448.0" layoutY="277.0" />
-      <TextField fx:id="username" layoutX="448.0" layoutY="344.0" />
-      <TextField fx:id="password" layoutX="448.0" layoutY="408.0" />
+      <Label layoutX="351.0" layoutY="286.0" text="Name" />
+      <Label layoutX="339.0" layoutY="349.0" text="Password" />
+      <Label layoutX="347.0" layoutY="413.0" text="Repeat" />
+      <TextField fx:id="name" layoutX="448.0" layoutY="281.0" />
+      <TextField fx:id="password" layoutX="448.0" layoutY="344.0" />
+      <TextField fx:id="repeat" layoutX="448.0" layoutY="408.0" />
       <Button fx:id="cancel" layoutX="448.0" layoutY="465.0" mnemonicParsing="false" onAction="#cancel_clicked" text="Cencel" />
-      <Button fx:id="register" layoutX="554.0" layoutY="465.0" mnemonicParsing="false" onAction="#register_clicked" text="Register" />
+      <Button fx:id="register" layoutX="547.0" layoutY="465.0" mnemonicParsing="false" onAction="#register_clicked" text="Register" />
    </children>
 </AnchorPane>

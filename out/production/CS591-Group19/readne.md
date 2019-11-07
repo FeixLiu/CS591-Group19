@@ -6,6 +6,6 @@ the money earn or loss from selling stocks will change the balance of that accou
 
 need user's id and account id to login or manipulate accounts
 
-all api relating with UI is in the FancyBank.java file
+all api relating with UI is in the FancyBank_db.java file
 
 the entrance of the program is the BankEntrance

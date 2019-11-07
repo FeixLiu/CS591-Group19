@@ -14,7 +14,7 @@ public class BankEntrance extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         FancyBank bank = new FancyBank();
-        FXMLLoader login_loader = new FXMLLoader(getClass().getResource("login.fxml"));
+        FXMLLoader login_loader = new FXMLLoader(getClass().getResource("Login.fxml"));
         Parent login_fxml = login_loader.load();
         Scene login = new Scene(login_fxml, 600, 400);
         Login_Controller login_control = (Login_Controller) login_loader.getController();
