@@ -1,6 +1,6 @@
 public class BankEntrance {
     public static void main(String[] args) {
-        FancyBank sd = new FancyBank();
+        FancyBank_db sd = new FancyBank_db();
         sd.mainMenu();
     }
 }
