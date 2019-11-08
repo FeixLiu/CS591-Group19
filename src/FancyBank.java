@@ -67,8 +67,6 @@ public class FancyBank implements Bank{
             }
         }
          */
-        calculateLoan();
-        calculateSave();
         //writeToDatabase()
     }
 
@@ -427,7 +425,7 @@ public class FancyBank implements Bank{
             return "Nobody holds a loan.";
     }
 
-    public boolean makeTransaction(String from, String pass, String to, String passTo, String kind, String newMoney) {
+    public boolean makeTransaction(String from, String pass, String to, String kind, String newMoney) {
         Person currentOperator = this.currentCustomer;
         System.out.println("From which account (input id)");
         //String from = Util.readStr();
@@ -442,8 +440,11 @@ public class FancyBank implements Bank{
         double money = Util.stringToDouble(newMoney);
         if (money < 0)
             return false;
-        String[] key = {from, pass, to, kind, passTo};
-        Account ac2 = ((Customer) currentOperator).getAccount(key[2]);
+        String[] key = {from, pass, to, kind};
+        Account ac2 = null;
+        for (Account ac : accounts)
+            if (ac.getAccountId().getId().equals(key[2]))
+                ac2 = ac;
         Account ac1 = ((Customer) currentOperator).getAccount(key[0]);
         //String getAccount(String cId, String cName, String id, String pass);
         //String getAccount(String cId, String cName, String id, String pass);
@@ -453,14 +454,14 @@ public class FancyBank implements Bank{
             System.out.println("Customer does not have these accounts!");
             return false;
         }
-        else if (ac1.getType().equals("Saving")) {
+        else if (ac1.getType().equals("Saving") || ac2.getType().equals("Security")) {
             log.addLog(currentOperator.getName().getName() + " make transaction fail.\n");
             ((Customer) currentOperator).addLog("Make Transaction fail \n");
-            System.out.println("Cannot transfer from saving!");
+            System.out.println("Cannot transfer from saving or to security!");
             return false;
         }
         else {
-            if (key[1].length() > 8 || !ac1.checkPassword(key[1]) || key[4].length() > 8 || !ac2.checkPassword(key[4])) {
+            if (key[1].length() > 8 || !ac1.checkPassword(key[1])) {
                 System.out.println("Wrong password!");
                 log.addLog(currentOperator.getName().getName() + " make transaction fail.\n");
                 ((Customer) currentOperator).addLog("Make Transaction fail \n");
@@ -552,6 +553,11 @@ public class FancyBank implements Bank{
         System.out.println("Wrong password for manager.");
         log.addLog("Manager login fail.\n");
         return false;
+    }
+
+    public void endDay() {
+        calculateLoan();
+        calculateSave();
     }
 
     public boolean newCustomer(Id id, String name, String p1, String p2) {

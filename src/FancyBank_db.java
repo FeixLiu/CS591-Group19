@@ -475,16 +475,17 @@ public class FancyBank_db implements Bank{
         String pass = Util.readStr();
         System.out.println("To which account (input id)");
         String to = Util.readStr();
-        System.out.println("Password for this account");
-        String pass2 = Util.readStr();
         System.out.println("Which kind of money do you want to transfer?\n" +
                 "You can input 'Dollar', 'Euro' or 'Yuan'");
         String kind = Util.readStr();
         System.out.println("How much money to you want to transfer?");
         double money = Util.readDouble();
-        String[] key = {from, pass, to, kind, pass2};
+        String[] key = {from, pass, to, kind};
         Account ac1 = ((Customer) currentOperator).getAccount(key[0]);
-        Account ac2 = ((Customer) currentOperator).getAccount(key[2]);
+        Account ac2 = null;
+        for (Account ac : accounts)
+            if (ac.getAccountId().getId().equals(key[2]))
+                ac2 = ac;
         //String getAccount(String cId, String cName, String id, String pass);
         //String getAccount(String cId, String cName, String id, String pass);
         if (ac1 == null || ac2 == null) {
@@ -492,13 +493,13 @@ public class FancyBank_db implements Bank{
             ((Customer) currentOperator).addLog("Log into account fail \n");
             System.out.println("Customer does not have these accounts!");
         }
-        else if (ac1.getType().equals("Saving")) {
+        else if (ac1.getType().equals("Saving") || ac2.getType().equals("Security")) {
             log.addLog(currentOperator.getName().getName() + " make transaction fail.\n");
             ((Customer) currentOperator).addLog("Make Transaction fail \n");
-            System.out.println("Cannot transfer from saving!");
+            System.out.println("Cannot transfer from saving or to security!");
         }
         else {
-            if (key[1].length() > 8 || !ac1.checkPassword(key[1]) || key[4].length() > 8 || !ac2.checkPassword(key[4])) {
+            if (key[1].length() > 8 || !ac1.checkPassword(key[1])) {
                 System.out.println("Wrong password!");
                 log.addLog(currentOperator.getName().getName() + " make transaction fail.\n");
                 ((Customer) currentOperator).addLog("Make Transaction fail \n");

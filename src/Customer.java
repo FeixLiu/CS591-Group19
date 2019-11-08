@@ -20,7 +20,7 @@ public class Customer extends Person {
     public String viewAccount() {
         StringBuilder log = new StringBuilder();
         for (Account a : accounts) {
-            log.append(a.getAccountId().getId()).append(" ").append(a.getType()).append(" ");
+            log.append("Account id: ").append(a.getAccountId().getId()).append(" ").append(a.getType()).append(" ");
             if (!a.getType().equals("Security")) {
                 List<Balance> balance = a.getAccountBalance();
                 for (Balance b : balance)
