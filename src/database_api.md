@@ -66,11 +66,11 @@ create a saving account for the customer
 ####String getAccount(String cId, String cName, String id, String pass); 
 check the customer whether has this account and the correctness of the password, return the type of the account
 return "No" for any incorrectness
-####double getMoney(String cId, String cName, String id, String type); 
+####double getMoney(String cId, String cName, String accountId, String type); 
 get one kind of money from the customer's account
 ####void createSecurity(String cId, String cName, String id, String pass, String associateSavingId); 
 create a security account for the customer
-####void addMoney(String cId, String cName, String id, double money, String type); 
+####void addMoney(String cId, String cName, String account_id, double money, String type); 
 add a one kind of money to the customer's account, if don't have that kind of money, create it
 ####double[] getStock(String name); 
 check whether has a stock, if has return the available and price, if not return [-1, -1]
@@ -82,23 +82,24 @@ with draw one kind on money from one account, if sufficient money, modify the ba
 buy howMany shares stocks with price, modify the available, currentSold, haveSold information of stocks, modify the information of the security account
 ####void addLog(String cId, String cName);
 add log to customer's log       
-####String vewStocks(String cId, String cName); 
-view all stocks the customer has bought (at which price buy how many)  
+####String viewStocks(String cId, String cName); 
+view all stocks the customer has bought (at which price buy how many)   // Note: Need to structure data more clearly for price bought, time bought, date bought, etc.
 ####double sellStock(String cId, String cName, String id, String name); 
+// Note: need to be clear about how many stocks to buy/ how many can sell, what price each stock was bought at
 sell stock of company name, return -1 if don't buy that stock, or else return the money earn by the selling     
 ####double getMoney(String cId, String cName, String type); 
 return all money of one kine that the customer holds
 ####void requestALoan(String cId, String cName, double money, double loanInterest); 
 request a loan
-####double getLoan(String cId, String cName); 
+####double getLoan(String cId, String cName); // Note: current implementation returns Arraylist<Double>; discuss at next meeting
 get all loan of the customer
-####void payForLoan(String cId, String cName); 
+####void payForLoan(String cId, String cName, String accountId); // Note: do upon further discussion of which account to pay loan from 
 pay for all loan
-####String viewBalance(String cId, String cName); 
+####String viewBalances(String cId, String cName); 
 return the information of all balance
-####String viewAccount(String cId, String cName); 
+####String viewAccounts(String cId, String cName); 
 return the information of all account
-####double closeAccount(String cId, String cName, String id); 
+####double closeAccount(String cId, String cName, String accountId); 
 close an account and return the money it left
 ####double sellAllStock(String cId, String cName, String id); 
 sell all money in a security account and close that account

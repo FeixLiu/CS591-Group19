@@ -49,6 +49,6 @@ curSold int<br>
 historyPrice String<br>
 
 #log
-logId String prim-key<br>
+logId String prim-key<br> (foreign key to cId)
 log String<br>
 date String prim-key<br>
