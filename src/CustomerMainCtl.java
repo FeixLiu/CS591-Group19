@@ -1,8 +1,12 @@
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class CustomerMainCtl {
     Scene login;
@@ -51,19 +55,27 @@ public class CustomerMainCtl {
     public void close(){
 
     }
-    public void deposit(){
+    public void deposit() throws IOException {
+        FXMLLoader deposit_loader = new FXMLLoader(getClass().getResource("Deposit.fxml"));
+        Parent deposit_fxml = deposit_loader.load();
+        Scene deposit_scene = new Scene(deposit_fxml, 1024, 768);
+        DepositCtl deposit_control = (DepositCtl) deposit_loader.getController();
+        deposit_control.setMain(deposit.getScene());
+
+        deposit_control.setBank(bank);
+        Stage window = (Stage) deposit.getScene().getWindow();
+        window.setScene(deposit_scene);
+    }
+    public void withdraw() throws IOException {
 
     }
-    public void withdraw(){
+    public void transfer() throws IOException {
 
     }
-    public void transfer(){
+    public void loan() throws IOException {
 
     }
-    public void loan(){
-
-    }
-    public void security(){
+    public void security() throws IOException {
 
     }
     public void viewAccount(){
@@ -84,7 +96,7 @@ public class CustomerMainCtl {
     }
     public void logs(){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Error");
+        alert.setTitle("Transactions");
         alert.setHeaderText(null);
         alert.setContentText(bank.getTransaction());
 

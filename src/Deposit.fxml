@@ -6,20 +6,20 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Deposit">
+<AnchorPane prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DepositCtl">
 
     <children>
         <Label layoutX="491.0" layoutY="178.0" text="Deposit" />
         <Label layoutX="398.0" layoutY="255.0" text="Account ID" />
         <Label layoutX="377.0" layoutY="319.0" text="Account Password" />
-        <TextField layoutX="486.0" layoutY="250.0" />
-        <TextField layoutX="486.0" layoutY="314.0" />
-        <Button layoutX="418.0" layoutY="499.0" mnemonicParsing="false" text="Submit" />
-        <Button layoutX="553.0" layoutY="499.0" mnemonicParsing="false" text="Cancel" />
+        <TextField fx:id="id" layoutX="486.0" layoutY="250.0" />
+        <TextField fx:id="password" layoutX="486.0" layoutY="314.0" />
+        <Button fx:id="submit" layoutX="418.0" layoutY="499.0" mnemonicParsing="false" text="Submit" onAction="#submit" />
+        <Button fx:id="cancel" layoutX="553.0" layoutY="499.0" mnemonicParsing="false" text="Cancel" onAction="#cancel"/>
       <Label layoutX="404.0" layoutY="384.0" text="Currency" />
       <Label layoutX="408.0" layoutY="445.0" text="Amount" />
-      <TextField layoutX="486.0" layoutY="379.0" />
-      <TextField layoutX="486.0" layoutY="440.0" />
+      <TextField fx:id="currency" layoutX="486.0" layoutY="379.0" />
+      <TextField fx:id="amount" layoutX="486.0" layoutY="440.0" />
     </children>
 
 </AnchorPane>
