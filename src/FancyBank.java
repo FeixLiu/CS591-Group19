@@ -205,6 +205,8 @@ public class FancyBank implements Bank{
     }
 
     public boolean changeStockPrice(String name, String newMoney) {
+        if (name.length() == 0 || newMoney.length() == 0)
+            return false;
         //boolean changeStockPrice(String companyName, double newPrice); change the price of a specific company, return false if no such a company
         System.out.print("Company's name: ");
         //String name = Util.readStr();
@@ -226,6 +228,8 @@ public class FancyBank implements Bank{
     }
 
     public boolean modifyStockAvailable(String name, String newAvailable) {
+        if (name.length() == 0 || newAvailable.length() == 0)
+            return false;
         //boolean modifyStockAvailable(String companyName, int newAvailable); change the available of a specific company, return false if no such a company
         System.out.print("Company's name: ");
         //String name = Util.readStr();
@@ -247,6 +251,8 @@ public class FancyBank implements Bank{
     }
 
     public boolean addNewStock(String name, String pri, String ava) {
+        if (name.length() == 0 || pri.length() == 0 || ava.length() == 0)
+            return false;
         //boolean addNewStock(String companyName, int available, double price); add a new stock, return false if the company has already hold a stock
         System.out.print("Company's name: ");
         //String name = Util.readStr();
@@ -273,6 +279,8 @@ public class FancyBank implements Bank{
     }
 
     public boolean deleteStock(String name) {
+        if (name.length() == 0)
+            return false;
         //boolean deleteStock(String companyName); delete a stock, return false if some customers are holding stocks of such company or no such a stock
         System.out.print("Company's name: ");
         //String name = Util.readStr();
@@ -290,6 +298,8 @@ public class FancyBank implements Bank{
     }
 
     public boolean buyStock(String name, String shares, String id, String pass) {
+        if (name.length() == 0 || shares.length() == 0 || id.length() == 0 || pass.length() == 0)
+            return false;
         Person currentOperator = this.currentCustomer;
         System.out.println(lookingAllStocks());
         System.out.print("Company's name: ");
@@ -366,6 +376,8 @@ public class FancyBank implements Bank{
     }
 
     public String sellStocks(String id, String pass, String name) {
+        if (name.length() == 0 || pass.length() == 0 || id.length() == 0)
+            return "Fail to sell stock";
         Person currentOperator = this.currentCustomer;
         System.out.print("Security account's id: ");
         //String id = Util.readStr();
@@ -426,6 +438,9 @@ public class FancyBank implements Bank{
     }
 
     public boolean makeTransaction(String from, String pass, String to, String kind, String newMoney) {
+        if (from.length() == 0 || pass.length() == 0 || to.length() == 0
+                || kind.length() == 0 || newMoney.length() == 0)
+            return false;
         Person currentOperator = this.currentCustomer;
         System.out.println("From which account (input id)");
         //String from = Util.readStr();
@@ -510,6 +525,8 @@ public class FancyBank implements Bank{
     }
 
     public boolean customerLogin(String id, String name, String pass) {
+        if (name.length() == 0 || pass.length() == 0 || id.length() == 0)
+            return false;
         System.out.print("Customer's name: ");
         //String name = Util.readStr();
         System.out.print("Customer's id: ");
@@ -539,6 +556,8 @@ public class FancyBank implements Bank{
     }
 
     public boolean managerLogin(String pass, int which) {
+        if (pass.length() == 0)
+            return false;
         System.out.print("Password: ");
         //String pass = Util.readStr();
         //boolean managerLogin(String password); check whether the password for manger correct or not
@@ -561,6 +580,8 @@ public class FancyBank implements Bank{
     }
 
     public boolean newCustomer(Id id, String name, String p1, String p2) {
+        if (name.length() == 0 || p1.length() == 0 || p2.length() == 0)
+            return false;
         //Id id = newId(Config.NEWCUSTOMER);
         System.out.println("Customer's id:" + id.getId());
         System.out.println("Customer's name:");
@@ -618,6 +639,8 @@ public class FancyBank implements Bank{
     }
 
     public boolean createAccount(Id id, String p1, String p2, int which, String save, String pa) {
+        if (p1.length() == 0 || p2.length() == 0 || save.length() == 0 || pa.length() == 0)
+            return false;
         //Id id = newId(Config.NEWACCOUNT);
 
         Person currentOperator = this.currentCustomer;
@@ -693,6 +716,8 @@ public class FancyBank implements Bank{
     }
 
     public boolean modifyMoney(String id, String pass, String type, String newMoney, int which) {
+        if (id.length() == 0 || pass.length() == 0 || newMoney.length() == 0)
+            return false;
         Person currentOperator = this.currentCustomer;
         System.out.println("Account's id");
         //String id = Util.readStr();
@@ -762,6 +787,8 @@ public class FancyBank implements Bank{
     }
 
     public boolean requestLoan(String newMoney) {
+        if (newMoney.length() == 0)
+            return false;
         Person currentOperator = this.currentCustomer;
         System.out.println("How much Dollars do you want to loan");
         double money = Util.stringToDouble(newMoney);
@@ -787,6 +814,8 @@ public class FancyBank implements Bank{
     }
 
     public boolean payForLoan(String id, String pass) {
+        if (pass.length() == 0 || id.length() == 0)
+            return false;
         Person currentOperator = this.currentCustomer;
         System.out.println("From which account to pay the loan?");
         //String id = Util.readStr();
@@ -862,6 +891,8 @@ public class FancyBank implements Bank{
     }
 
     public String closeAccount(String id, String pass) {
+        if (pass.length() == 0 || id.length() == 0)
+            return "Close account fail!";
         Person currentOperator = this.currentCustomer;
         System.out.println("Which account do you want to close?");
         //String id = Util.readStr();
@@ -874,14 +905,14 @@ public class FancyBank implements Bank{
             log.addLog(currentOperator.getName().getName() + " close account fail.\n");
             ((Customer) currentOperator).addLog("Close account fail \n");
             System.out.println("Customer does not have this account!");
-            return "Close account fail \n";
+            return "Close account fail!";
         }
         else {
             if (key[1].length() > 8 || !ac.checkPassword(key[1])) {
                 System.out.println("Wrong password!");
                 log.addLog(currentOperator.getName().getName() + " account login fail.\n");
                 ((Customer) currentOperator).addLog("Log into account fail \n");
-                return "Close account fail \n";
+                return "Close account fail!";
             }
             else {
                 log.addLog(currentOperator.getName().getName() + " log into account: "
@@ -944,6 +975,8 @@ public class FancyBank implements Bank{
     }
 
     public String lookSpecific(String id, String name) {
+        if (name.length() == 0 || id.length() == 0)
+            return "No such customer!";
         //String lookSpecific(String id, String name); return the information of a specific customer
         System.out.println("Customer's id");
         //String id = Util.readStr();
@@ -960,6 +993,8 @@ public class FancyBank implements Bank{
     }
 
     public boolean changeInterest(String newSave, String newLoan){
+        if (newSave.length() == 0 || newLoan.length() == 0)
+            return false;
         //void changeInterest(double saving, double loan); change the interest of saving account and loan
         System.out.print("New saving rate:");
         double sr = Util.stringToDouble(newSave);
@@ -1003,6 +1038,8 @@ public class FancyBank implements Bank{
     }
 
     public boolean changeServiceFee(String newServiceFee) {
+        if (newServiceFee.length() == 0)
+            return false;
         //void changeServiceFee(int newService); change the service fee of the bank
         System.out.print("New service fee");
         double a = Util.stringToDouble(newServiceFee);
