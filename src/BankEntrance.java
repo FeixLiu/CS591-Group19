@@ -31,6 +31,8 @@ public class BankEntrance extends Application {
 
         primaryStage.setTitle("ATM Welcome");
         primaryStage.setScene(login);
+        primaryStage.setWidth(1024.0);
+        primaryStage.setHeight(768.0);
         primaryStage.show();
 
     }

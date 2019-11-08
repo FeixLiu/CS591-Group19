@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="Withdraw"
+            prefHeight="768.0" prefWidth="1024.0">
+
+    <children>
+        <Label layoutX="491.0" layoutY="178.0" text="Withdraw" />
+        <Label layoutX="398.0" layoutY="255.0" text="Account ID" />
+        <Label layoutX="377.0" layoutY="319.0" text="Account Password" />
+        <TextField layoutX="486.0" layoutY="250.0" />
+        <TextField layoutX="486.0" layoutY="314.0" />
+        <Button layoutX="418.0" layoutY="499.0" mnemonicParsing="false" text="Submit" />
+        <Button layoutX="553.0" layoutY="499.0" mnemonicParsing="false" text="Cancel" />
+        <Label layoutX="404.0" layoutY="384.0" text="Currency" />
+        <Label layoutX="408.0" layoutY="445.0" text="Amount" />
+        <TextField layoutX="486.0" layoutY="379.0" />
+        <TextField layoutX="486.0" layoutY="440.0" />
+    </children>
+
+</AnchorPane>

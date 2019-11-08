@@ -21,6 +21,9 @@ public class Login_Controller{
     @FXML
     TextField username;
     @FXML
+    TextField userId;
+
+    @FXML
     TextField password;
 
     public void setReg_scene(Scene scene){
@@ -48,14 +51,28 @@ public class Login_Controller{
 
     public void loginClicked() throws IOException {
         System.out.println("login clicked");
-        if(username.getText().length()==0){
-            System.out.println("username can not be empty");
+//        if(username.getText().length()==0){
+//            System.out.println("username can not be empty");
+//            return;
+//        }
+//        if(password.getText().length()==0){
+//            System.out.println(("password can not be empty"));
+//            return;
+//        }
+
+        if(bank.customerLogin(userId.getText(), username.getText(), password.getText())){
+            FXMLLoader main_loader = new FXMLLoader(getClass().getResource("CustomerMain.fxml"));
+            Parent main_fxml = main_loader.load();
+            Scene main = new Scene(main_fxml, 1024, 768);
+            CustomerMainCtl main_control = (CustomerMainCtl) main_loader.getController();
+            main_control.setLogin(login.getScene());
+
+            main_control.setBank(bank);
+            Stage window = (Stage) register.getScene().getWindow();
+            window.setScene(main);
             return;
         }
-        if(password.getText().length()==0){
-            System.out.println(("password can not be empty"));
-            return;
-        }
+
 //        if(username.getText().compareTo(atm.manager.getPassword()) == 0 && password.getText().compareTo(atm.manager.getPassword())==0){
 //            FXMLLoader manage_loader = new FXMLLoader(getClass().getResource("../../Hong_Qichao_My_Fancy_Bank/src/manage.fxml"));
 //            Parent manage_fxml = manage_loader.load();
