@@ -151,7 +151,7 @@ return: return the accounts' info of the customer
 ####public String closeAccount(String id, String pass)
 input: the id and password for the closing account<br>
 calling: call at the "14. Close account." function <br>
-return: return the money earn by the closing, "fail" will be returned for all errors
+return: return the money earn by the closing, "fail"
 ####public String getTransaction()
 input: null<br>
 calling: call at the "15. Get transaction." function <br>

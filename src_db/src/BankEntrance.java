@@ -1,16 +1,16 @@
-import javafx.application.Application;
+/*import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
+import javafx.stage.Stage;*/
 
-public class BankEntrance extends Application {
+public class BankEntrance{
     public static void main(String[] args) {
-//        FancyBank sd = new FancyBank();
-//        sd.mainMenu();
-        launch(args);
+        FancyBank sd = new FancyBank();
+        sd.mainMenu();
+        //launch(args);
     }
-
+    /*
     @Override
     public void start(Stage primaryStage) throws Exception {
         FancyBank bank = new FancyBank();
@@ -33,5 +33,5 @@ public class BankEntrance extends Application {
         primaryStage.setScene(login);
         primaryStage.show();
 
-    }
+    }*/
 }
