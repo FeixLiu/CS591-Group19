@@ -1,14 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Security">
    <children>
       <Label layoutX="490.0" layoutY="67.0" text="Security" />
+      <ScrollPane layoutX="14.0" layoutY="109.0" prefHeight="640.0" prefWidth="283.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="638.0" prefWidth="281.0">
+               <children>
+                  <ListView prefHeight="640.0" prefWidth="283.0" />
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+      <RadioButton layoutX="838.0" layoutY="140.0" mnemonicParsing="false" text="Buy Stock" />
+      <RadioButton layoutX="839.0" layoutY="186.0" mnemonicParsing="false" text="Sell Stock" />
+      <Label layoutX="21.0" layoutY="84.0" text="Stock List" />
+      <Label layoutX="797.0" layoutY="227.0" text="Stock Name" />
+      <TextField layoutX="797.0" layoutY="252.0" />
+      <TextField layoutX="797.0" layoutY="311.0" />
+      <Label layoutX="797.0" layoutY="286.0" text="No. shares" />
+      <TextField layoutX="797.0" layoutY="371.0" />
+      <Label layoutX="797.0" layoutY="346.0" text="Account ID" />
+      <TextField layoutX="797.0" layoutY="430.0" />
+      <Label layoutX="797.0" layoutY="405.0" text="Password" />
+      <LineChart layoutX="297.0" layoutY="109.0">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </LineChart>
+      <Button layoutX="851.0" layoutY="482.0" mnemonicParsing="false" text="Submit" />
+      <Button layoutX="931.0" layoutY="34.0" mnemonicParsing="false" text="Return" />
    </children>
 </AnchorPane>
