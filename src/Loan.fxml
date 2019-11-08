@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Loan"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.231" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LoanCtl">
+   <children>
+      <Label layoutX="497.0" layoutY="134.0" text="Loan" />
+      <Button layoutX="318.0" layoutY="338.0" mnemonicParsing="false" text="Request Loan" />
+      <Button layoutX="632.0" layoutY="338.0" mnemonicParsing="false" text="Pay Loan" />
+      <Button layoutX="485.0" layoutY="492.0" mnemonicParsing="false" text="Cancel" />
+   </children>
 </AnchorPane>
