@@ -13,7 +13,7 @@ public class FancyBank implements Bank{
     private double savingLimit;
     private List<Balance> myBalance;
     private List<Stock> stocks;
-    private Person currentCustomer;
+    public Person currentCustomer;
 
     public FancyBank() {
         //int[] bankStart(); return current service fee, saving interest, loan interest

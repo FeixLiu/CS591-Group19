@@ -9,7 +9,7 @@
 
 <AnchorPane prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CustomerMainCtl">
    <children>
-      <Button layoutX="928.0" layoutY="35.0" mnemonicParsing="false" text="Logout" />
+      <Button fx:id="logout" layoutX="928.0" layoutY="35.0" mnemonicParsing="false" text="Logout" onAction="#logout" />
       <Button layoutX="281.0" layoutY="264.0" mnemonicParsing="false" text="Open Account" />
       <Button layoutX="641.0" layoutY="264.0" mnemonicParsing="false" text="Close Account" />
       <Button layoutX="298.0" layoutY="366.0" mnemonicParsing="false" text="Deposit" />
