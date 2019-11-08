@@ -10,16 +10,16 @@
 <AnchorPane prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CustomerMainCtl">
    <children>
       <Button fx:id="logout" layoutX="928.0" layoutY="35.0" mnemonicParsing="false" text="Logout" onAction="#logout" />
-      <Button layoutX="281.0" layoutY="264.0" mnemonicParsing="false" text="Open Account" />
-      <Button layoutX="641.0" layoutY="264.0" mnemonicParsing="false" text="Close Account" />
-      <Button layoutX="298.0" layoutY="366.0" mnemonicParsing="false" text="Deposit" />
-      <Button layoutX="657.0" layoutY="366.0" mnemonicParsing="false" text="Withdraw" />
-      <Button layoutX="297.0" layoutY="460.0" mnemonicParsing="false" text="Transfer" />
-      <Button layoutX="670.0" layoutY="460.0" mnemonicParsing="false" text="Loan" />
-      <Button layoutX="297.0" layoutY="560.0" mnemonicParsing="false" text="Security" />
-      <Button layoutX="278.0" layoutY="182.0" mnemonicParsing="false" text="View Accounts" />
-      <Button layoutX="644.0" layoutY="182.0" mnemonicParsing="false" text="View Balance" />
-      <Button layoutX="637.0" layoutY="560.0" mnemonicParsing="false" text="View Transaction" />
+      <Button fx:id="open" layoutX="281.0" layoutY="264.0" mnemonicParsing="false" text="Open Account" onAction="#open"/>
+      <Button fx:id="close" layoutX="641.0" layoutY="264.0" mnemonicParsing="false" text="Close Account" onAction="#close"/>
+      <Button fx:id="deposit" layoutX="298.0" layoutY="366.0" mnemonicParsing="false" text="Deposit" onAction="#deposit"/>
+      <Button fx:id="withdraw" layoutX="657.0" layoutY="366.0" mnemonicParsing="false" text="Withdraw" onAction="#withdraw"/>
+      <Button fx:id="transfer" layoutX="297.0" layoutY="460.0" mnemonicParsing="false" text="Transfer" onAction="#transfer"/>
+      <Button fx:id="loan" layoutX="670.0" layoutY="460.0" mnemonicParsing="false" text="Loan" onAction="#loan"/>
+      <Button fx:id="security" layoutX="297.0" layoutY="560.0" mnemonicParsing="false" text="Security" onAction="#security"/>
+      <Button fx:id="accounts" layoutX="278.0" layoutY="182.0" mnemonicParsing="false" text="View Accounts" onAction="#viewAccount" />
+      <Button fx:id="balance" layoutX="644.0" layoutY="182.0" mnemonicParsing="false" text="View Balance" onAction="#viewBalance"/>
+      <Button fx:id="logs" layoutX="637.0" layoutY="560.0" mnemonicParsing="false" text="View Transaction" onAction="#logs"/>
       <Label layoutX="486.0" layoutY="94.0" text="Welcome" />
    </children>
 </AnchorPane>

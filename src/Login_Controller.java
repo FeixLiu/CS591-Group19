@@ -39,6 +39,7 @@ public class Login_Controller{
     }
 
     public void reset(){
+        userId.setText("");
         username.setText("");
         password.setText("");
     }

@@ -11,6 +11,7 @@ public class Log {
     public String getLog() {
         if (log.length() == 0)
             return "No Log";
+        /*
         log = log.replaceAll("\n", " ");
         StringBuilder s = new StringBuilder(log);
         for (int i = 1; i < s.length()/50; i++)
@@ -20,12 +21,15 @@ public class Log {
                     break;
                 }
         return s.toString();
+        */
+        return this.log;
     }
 
     public void addLog(String log) {
         SimpleDateFormat sdf = new SimpleDateFormat();
         sdf.applyPattern("yyyy-MM-dd HH:mm:ss");
         Date date = new Date();// 获取当前时间
+        this.log += "\n";
         this.log += sdf.format(date);
         this.log += "\t";
         this.log += log;
