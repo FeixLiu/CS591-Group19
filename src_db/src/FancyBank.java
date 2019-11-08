@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class FancyBank_db implements Bank{
+public class FancyBank implements Bank{
     private List<Customer> customers;
     private List<Account> accounts;
     private List<Customer> loans;
@@ -19,7 +19,7 @@ public class FancyBank_db implements Bank{
     private Id id;
     private int date;
 
-    public FancyBank_db() {
+    public FancyBank() {
         db = new DataBase();
         //int[] bankStart(); return current service fee, saving interest, loan interest
         //double[] information = db.bankStart();
