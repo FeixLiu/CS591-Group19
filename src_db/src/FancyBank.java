@@ -18,6 +18,7 @@ public class FancyBank implements Bank{
     private DataBase db;
     private Id id;
     private int date;
+    private double securityLimit;
 
     public FancyBank() {
         db = new DataBase();
@@ -27,7 +28,6 @@ public class FancyBank implements Bank{
         StartInfo startInfo = db.startInfo();
         loadData(startInfo);
         log = new Log();
-        savingLimit = 100;
         id = new Id("bank");
         //loadFromDatabase();
     }
@@ -41,6 +41,8 @@ public class FancyBank implements Bank{
         myBalance.add(new Balance(si.bankInfo.get(3), "Dollar"));
         myBalance.add(new Balance(si.bankInfo.get(4), "Euro"));
         myBalance.add(new Balance(si.bankInfo.get(5), "Yuan"));
+        securityLimit = si.bankInfo.get(7);
+        savingLimit = si.bankInfo.get(8);
         stocks = new ArrayList<>();
         for (HashMap<String, List<Double>> stock: si.stockInfo) {
             for (String name: stock.keySet()) {
@@ -96,7 +98,19 @@ public class FancyBank implements Bank{
                 "The default saving interest is " + this.savingInterest.getInterest() + "%.\n" +
                 "The default loan interest is " + this.loanInterest.getInterest() + "%.\n" +
                 "Saving account with more than " + this.savingLimit + " will earn interests.\n" +
-                "Saving account with more than $500 can create security account.\n\n";
+                "Saving account with more than $" + this.securityLimit +  "can create security account.\n\n";
+    }
+
+    public void modifySavingLimit() {
+        double save = Util.readDouble();
+        savingLimit = save;
+        db.updateSavingLimit(save);
+    }
+
+    public void modifySavingLimitToSecurity(){
+        double save = Util.readDouble();
+        securityLimit = save;
+        db.updateSecurityLimit(save);
     }
 
     public void mainMenu() {
@@ -698,7 +712,7 @@ public class FancyBank implements Bank{
                 else {
                     double money = ac.getMoney("Dollar");
                     //double getMoney(String cId, String cName, String id, String type); get one kind of money from the account
-                    if (money < 500) {
+                    if (money < securityLimit) {
                         System.out.println("Do not have enough money in saving.");
                         log.addLog("Fail to create security account.\n");
                         ((Customer) currentOperator).addLog("Fail to create security account.\n");

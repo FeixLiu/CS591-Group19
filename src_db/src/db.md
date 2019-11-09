@@ -10,6 +10,8 @@ yuanBalance double<br>
 managerPass String<br>
 managerName String<br>
 date Int<br>
+savingLimit real<br>
+securityLimit real<br>
 
 #user
 id String prim-key<br>
@@ -35,10 +37,13 @@ type String<br>
 money double<br>
 
 #security
-id String prim-key<br>
-userId String foreign-key<br>
-boughtStock String<br>
-accountId<br>
+id int prim-key<br>
+securityAccountId String<br>
+pasls String<br>
+companyName String <br>
+price double<br>
+share int<br>
+accountId String<br>
 
 #stock
 companyName String prim-key<br>

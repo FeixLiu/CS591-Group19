@@ -2,7 +2,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class StartInfo {
-    public List<Double> bankInfo; //[serviceFee, savingInterest, loanInterest, dollarBalance, euroBalance, yuanBalance, date]
+    public List<Double> bankInfo; //[serviceFee, savingInterest, loanInterest, dollarBalance, euroBalance, yuanBalance, date, securityLimit, savingLimit]
     public List<HashMap<String, List<Double>>> stockInfo;
     //[name1 -> [available, price, haveSold, curSold, historyPrice1, historyPrice2],
     // name2 -> [available, price, haveSold, curSold, historyPrice1, historyPrice2]]

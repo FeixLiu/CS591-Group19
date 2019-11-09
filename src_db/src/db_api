@@ -42,5 +42,9 @@ StartInfo startInfo(); return all the information
 
 void addLog(String id, String log, String date);
 
-void endDay();
+void endDay(); increase the date by 1
+
+void updateSavingLimit(double);
+
+void updateSecurityLimit(double);
 

@@ -13,7 +13,8 @@ public class FancyBank implements Bank{
     private double savingLimit;
     private List<Balance> myBalance;
     private List<Stock> stocks;
-    public Person currentCustomer;
+    private Person currentCustomer;
+    private double securityLimit;
 
     public FancyBank() {
         //int[] bankStart(); return current service fee, saving interest, loan interest
@@ -26,6 +27,7 @@ public class FancyBank implements Bank{
         log = new Log();
         serviceFee = 10;
         savingLimit = 100;
+        securityLimit = 500;
         myBalance = new ArrayList<>();
         stocks = new ArrayList<>();
         currentCustomer = null;
@@ -133,6 +135,9 @@ public class FancyBank implements Bank{
         System.out.println("16. Look the log.");
         System.out.println("17. View bank balance.");
         System.out.println("18. Logout.");
+        System.out.println("18. Modify saving limit to earn interest.");
+        System.out.println("18. Modify saving limit to create security.");
+        System.out.println("18. Logout.");
             /*int op = Util.readInt();
 
             switch (op) {
@@ -158,6 +163,22 @@ public class FancyBank implements Bank{
             }
 
              */
+    }
+
+    public boolean modifySavingLimit(String newSaving) {
+        double save = Util.stringToDouble(newSaving);
+        if (save == -1)
+            return false;
+        this.savingLimit = save;
+        return true;
+    }
+
+    public boolean modifySavingLimitToSecurity(String newSaving) {
+        double save = Util.stringToDouble(newSaving);
+        if (save == -1)
+            return false;
+        this.securityLimit = save;
+        return true;
     }
 
     public void customerLogout() {
@@ -693,7 +714,7 @@ public class FancyBank implements Bank{
                 else {
                     double money = ac.getMoney("Dollar");
                     //double getMoney(String cId, String cName, String id, String type); get one kind of money from the account
-                    if (money < 500) {
+                    if (money < securityLimit) {
                         System.out.println("Do not have enough money in saving.");
                         log.addLog("Fail to create security account.\n");
                         ((Customer) currentOperator).addLog("Fail to create security account.\n");
