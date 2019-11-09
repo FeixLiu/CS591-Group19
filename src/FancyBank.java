@@ -167,7 +167,7 @@ public class FancyBank implements Bank{
 
     public boolean modifySavingLimit(String newSaving) {
         double save = Util.stringToDouble(newSaving);
-        if (save == -1)
+        if (save < 0)
             return false;
         this.savingLimit = save;
         return true;
@@ -175,7 +175,7 @@ public class FancyBank implements Bank{
 
     public boolean modifySavingLimitToSecurity(String newSaving) {
         double save = Util.stringToDouble(newSaving);
-        if (save == -1)
+        if (save < 0)
             return false;
         this.securityLimit = save;
         return true;
