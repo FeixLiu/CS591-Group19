@@ -49,8 +49,16 @@ public class CustomerMainCtl {
         window.setScene(login);
     }
 
-    public void open(){
+    public void open() throws IOException {
+        FXMLLoader open_loader = new FXMLLoader(getClass().getResource("OpenAccount.fxml"));
+        Parent open_fxml = open_loader.load();
+        Scene open_scene = new Scene(open_fxml, 1024, 768);
+        OpenAccountCtl open_control = open_loader.getController();
+        open_control.setMain(open.getScene());
 
+        open_control.setBank(bank);
+        Stage window = (Stage) open.getScene().getWindow();
+        window.setScene(open_scene);
     }
     public void close(){
 
@@ -59,7 +67,7 @@ public class CustomerMainCtl {
         FXMLLoader deposit_loader = new FXMLLoader(getClass().getResource("Deposit.fxml"));
         Parent deposit_fxml = deposit_loader.load();
         Scene deposit_scene = new Scene(deposit_fxml, 1024, 768);
-        DepositCtl deposit_control = (DepositCtl) deposit_loader.getController();
+        DepositCtl deposit_control = deposit_loader.getController();
         deposit_control.setMain(deposit.getScene());
 
         deposit_control.setBank(bank);

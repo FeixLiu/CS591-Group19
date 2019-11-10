@@ -54,6 +54,9 @@ public class DepositCtl {
                 success.setHeaderText(null);
                 success.setContentText("Succeed!");
                 success.showAndWait();
+
+                cancel();
+
             }else{
                 Alert error = new Alert(Alert.AlertType.ERROR);
                 error.setTitle("Error");
