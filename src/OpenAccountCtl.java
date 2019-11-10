@@ -75,6 +75,7 @@ public class OpenAccountCtl {
                     error.setContentText("Invalid Input\n\nTry Again");
                     error.showAndWait();
                 }
+                return;
             }
             Id accId = bank.newId(Config.NEWACCOUNT);
             if(typeSaving.isSelected()){
@@ -94,6 +95,7 @@ public class OpenAccountCtl {
                     error.setContentText("Invalid Input\n\nTry Again");
                     error.showAndWait();
                 }
+                return;
             }
             if(typeSecurity.isSelected()){
                 if (bank.createAccount(newId, password.getText(), repeat.getText(),Config.NEWSECURITY,savingId.getText(), savingPassword.getText())){
@@ -112,6 +114,7 @@ public class OpenAccountCtl {
                     error.setContentText("Invalid Input\n\nTry Again");
                     error.showAndWait();
                 }
+                return;
             }
 
         } else {
