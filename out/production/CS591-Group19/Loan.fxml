@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.231" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LoanCtl">
+<AnchorPane prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LoanCtl">
    <children>
       <Label layoutX="497.0" layoutY="134.0" text="Loan" />
-      <Button layoutX="318.0" layoutY="338.0" mnemonicParsing="false" text="Request Loan" />
-      <Button layoutX="632.0" layoutY="338.0" mnemonicParsing="false" text="Pay Loan" />
-      <Button layoutX="485.0" layoutY="492.0" mnemonicParsing="false" text="Cancel" />
+      <Button fx:id="request" layoutX="259.0" layoutY="446.0" mnemonicParsing="false" onAction="#request" text="Request Loan" />
+      <Button fx:id="pay" layoutX="686.0" layoutY="446.0" mnemonicParsing="false" onAction="#pay" text="Pay Loan" />
+      <Button fx:id="cancel" layoutX="483.0" layoutY="530.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
+      <TextField layoutX="259.0" layoutY="281.0" fx:id="amount"/>
+      <TextField layoutX="686.0" layoutY="341.0" fx:id="id"/>
+      <TextField layoutX="686.0" layoutY="281.0" fx:id="password"/>
+      <Label layoutX="190.0" layoutY="286.0" text="Amount" />
+      <Label layoutX="593.0" layoutY="286.0" text="Pay Account ID" />
+      <Label layoutX="611.0" layoutY="346.0" text="Password" />
    </children>
 </AnchorPane>

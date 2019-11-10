@@ -8,21 +8,21 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Withdraw"
+            fx:controller="WithdrawCtl"
             prefHeight="768.0" prefWidth="1024.0">
 
     <children>
         <Label layoutX="491.0" layoutY="178.0" text="Withdraw" />
         <Label layoutX="398.0" layoutY="255.0" text="Account ID" />
         <Label layoutX="377.0" layoutY="319.0" text="Account Password" />
-        <TextField layoutX="486.0" layoutY="250.0" />
-        <TextField layoutX="486.0" layoutY="314.0" />
-        <Button layoutX="418.0" layoutY="499.0" mnemonicParsing="false" text="Submit" />
-        <Button layoutX="553.0" layoutY="499.0" mnemonicParsing="false" text="Cancel" />
+        <TextField layoutX="486.0" layoutY="250.0" fx:id="id"/>
+        <TextField layoutX="486.0" layoutY="314.0" fx:id="password"/>
+        <Button layoutX="418.0" layoutY="499.0" mnemonicParsing="false" text="Submit" fx:id="submit" onAction="#submit"/>
+        <Button layoutX="553.0" layoutY="499.0" mnemonicParsing="false" text="Cancel" fx:id="cancel" onAction="#cancel"/>
         <Label layoutX="404.0" layoutY="384.0" text="Currency" />
         <Label layoutX="408.0" layoutY="445.0" text="Amount" />
-        <TextField layoutX="486.0" layoutY="379.0" />
-        <TextField layoutX="486.0" layoutY="440.0" />
+        <TextField layoutX="486.0" layoutY="379.0" fx:id="currency"/>
+        <TextField layoutX="486.0" layoutY="440.0" fx:id="amount"/>
     </children>
 
 </AnchorPane>
