@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ManagerViewCtl">
+   <children>
+      <Label layoutX="473.0" layoutY="73.0" text="Manager View" />
+      <Button fx:id="allCustomer" layoutX="59.0" layoutY="127.0" mnemonicParsing="false" onAction="#allCustomer" text="All customer" />
+      <Button fx:id="allMoney" layoutX="59.0" layoutY="174.0" mnemonicParsing="false" onAction="#allMoney" text="All money" />
+      <Button fx:id="allLoan" layoutX="59.0" layoutY="223.0" mnemonicParsing="false" onAction="#allLoan" text="All loan" />
+      <Button fx:id="logout" layoutX="936.0" layoutY="31.0" mnemonicParsing="false" onAction="#logout" text="Log out" />
+      <Button fx:id="bankBalance" layoutX="60.0" layoutY="322.0" mnemonicParsing="false" onAction="#bankBalance" text="Bank Balance" />
+      <Button fx:id="checkCustomer" layoutX="212.0" layoutY="127.0" mnemonicParsing="false" onAction="#checkCustomer" text="Check customer(id, name)" />
+      <Button fx:id="checkCustomerMostLoan" layoutX="212.0" layoutY="223.0" mnemonicParsing="false" onAction="#checkCustomerMostLoan" text="Check customer with most loan" />
+      <Button fx:id="allCustomerStocks" layoutX="60.0" layoutY="272.0" mnemonicParsing="false" onAction="#allCustomerStocks" text="All custsomer stocks" />
+      <Button fx:id="changeStockPrice" layoutX="212.0" layoutY="272.0" mnemonicParsing="false" onAction="#changeStockPrice" text="Change stock price" />
+      <Button fx:id="changeStockAvail" layoutX="380.0" layoutY="272.0" mnemonicParsing="false" onAction="#changeStockAvail" text="Change stock availability" />
+      <Button fx:id="addStock" layoutX="568.0" layoutY="272.0" mnemonicParsing="false" onAction="#addStock" text="Add stock" />
+      <Button fx:id="deleteStock" layoutX="665.0" layoutY="272.0" mnemonicParsing="false" onAction="#deleteStock" text="Delete stock" />
+      <Button fx:id="changeInterest" layoutX="212.0" layoutY="322.0" mnemonicParsing="false" onAction="#changeInterest" text="Change interest" />
+      <Button fx:id="endDay" layoutX="934.0" layoutY="77.0" mnemonicParsing="false" onAction="#endDay" text="End Day" />
+      <Button fx:id="changeServiceFee" layoutX="380.0" layoutY="322.0" mnemonicParsing="false" onAction="#changeServiceFee" text="Change service fee" />
+      <Button fx:id="logs" layoutX="61.0" layoutY="371.0" mnemonicParsing="false" onAction="#logs" text="Logs" />
+      <Button fx:id="changeSavingInterestThreshold" layoutX="212.0" layoutY="371.0" mnemonicParsing="false" onAction="#changeSavingInterestThreshold" text="Change saving interest threshold" />
+      <Button fx:id="changeSecurityOpeningThreshold" layoutX="438.0" layoutY="371.0" mnemonicParsing="false" onAction="#changeSecurityOpeningThreshold" text="Change security opening threshold" />
+      <Text fx:id="stockList" layoutX="61.0" layoutY="464.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="151.0" />
+      <Label layoutX="61.0" layoutY="427.0" text="Stock list:" />
+      <AnchorPane fx:id="inputP" layoutX="377.0" layoutY="427.0" prefHeight="214.0" prefWidth="253.0">
+         <children>
+            <TextField fx:id="lab1" layoutX="53.0" layoutY="21.0" />
+            <TextField fx:id="lab2" layoutX="53.0" layoutY="67.0" />
+            <TextField fx:id="lab3" layoutX="53.0" layoutY="116.0" />
+            <Button fx:id="submit" layoutX="99.0" layoutY="179.0" mnemonicParsing="false" onAction="#submit" text="Submit" />
+            <Label layoutX="14.0" layoutY="26.0" text="Label1" />
+            <Label layoutX="14.0" layoutY="72.0" text="Label2" />
+            <Label layoutX="14.0" layoutY="121.0" text="Label3" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
