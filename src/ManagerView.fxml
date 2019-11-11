@@ -30,15 +30,15 @@
       <Button fx:id="changeSecurityOpeningThreshold" layoutX="438.0" layoutY="371.0" mnemonicParsing="false" onAction="#changeSecurityOpeningThreshold" text="Change security opening threshold" />
       <Text fx:id="stockList" layoutX="61.0" layoutY="464.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="151.0" />
       <Label layoutX="61.0" layoutY="427.0" text="Stock list:" />
-      <AnchorPane fx:id="inputP" layoutX="377.0" layoutY="427.0" prefHeight="214.0" prefWidth="253.0">
+      <AnchorPane fx:id="inputP" layoutX="341.0" layoutY="427.0" prefHeight="214.0" prefWidth="342.0">
          <children>
-            <TextField fx:id="lab1" layoutX="53.0" layoutY="21.0" />
-            <TextField fx:id="lab2" layoutX="53.0" layoutY="67.0" />
-            <TextField fx:id="lab3" layoutX="53.0" layoutY="116.0" />
-            <Button fx:id="submit" layoutX="99.0" layoutY="179.0" mnemonicParsing="false" onAction="#submit" text="Submit" />
-            <Label layoutX="14.0" layoutY="26.0" text="Label1" />
-            <Label layoutX="14.0" layoutY="72.0" text="Label2" />
-            <Label layoutX="14.0" layoutY="121.0" text="Label3" />
+            <TextField fx:id="lab1" layoutX="156.0" layoutY="21.0" />
+            <TextField fx:id="lab2" layoutX="156.0" layoutY="67.0" />
+            <TextField fx:id="lab3" layoutX="156.0" layoutY="116.0" />
+            <Button fx:id="submit" layoutX="128.0" layoutY="173.0" mnemonicParsing="false" onAction="#submit" text="Submit" />
+            <Label fx:id="label1" layoutX="14.0" layoutY="26.0" text="Label1" />
+            <Label fx:id="label2" layoutX="14.0" layoutY="72.0" text="Label2" />
+            <Label fx:id="label3" layoutX="14.0" layoutY="121.0" text="Label3" />
          </children>
       </AnchorPane>
    </children>

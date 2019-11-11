@@ -1,6 +1,7 @@
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.util.Optional;
@@ -17,6 +18,7 @@ public class SecurityCtl {
 
     public void setBank(FancyBank bank) {
         this.bank = bank;
+        stocks();
     }
 
     @FXML
@@ -45,6 +47,7 @@ public class SecurityCtl {
                     success.setContentText("Succeed!");
                     success.showAndWait();
 
+                    currStocks();
 
                 }else{
                     Alert error = new Alert(Alert.AlertType.ERROR);
@@ -62,6 +65,8 @@ public class SecurityCtl {
                 res.setHeaderText(null);
                 res.setContentText(str);
                 res.showAndWait();
+
+                currStocks();
                 return;
             }
         } else {
@@ -93,5 +98,17 @@ public class SecurityCtl {
         buy.setSelected(false);
         sell.setSelected(true);
         number.setVisible(false);
+    }
+
+    @FXML
+    Text stocks;
+    public void stocks(){
+        stocks.setText(bank.lookingAllStocks());
+    }
+
+    @FXML
+    Text currStocks;
+    public void currStocks(){
+        currStocks.setText(bank.viewStocks());
     }
 }

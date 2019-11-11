@@ -19,6 +19,7 @@ public class ManagerViewCtl {
 
     public void setBank(FancyBank bank) {
         this.bank = bank;
+        stockList.setText(bank.lookingAllStocks());
     }
 
     @FXML
@@ -359,8 +360,9 @@ public class ManagerViewCtl {
                     success.setHeaderText(null);
                     success.setContentText("Succeed!");
                     success.showAndWait();
-
+                    stockList.setText(bank.lookingAllStocks());
                     inputP.setVisible(false);
+
 
                 }else{
                     Alert error = new Alert(Alert.AlertType.ERROR);
@@ -378,7 +380,7 @@ public class ManagerViewCtl {
                     success.setHeaderText(null);
                     success.setContentText("Succeed!");
                     success.showAndWait();
-
+                    stockList.setText(bank.lookingAllStocks());
                     inputP.setVisible(false);
 
                 }else{

@@ -99,6 +99,8 @@ public class Login_Controller{
             manager_control.setLogin(login.getScene());
             manager_control.setBank(bank);
             Stage window = (Stage) register.getScene().getWindow();
+            mPassword.setText("");
+            inputP.setVisible(false);
             window.setScene(manage);
             return;
         }
